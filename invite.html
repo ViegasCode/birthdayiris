@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aniversario da Iris</title>
+  <title>Ronque com a Iris</title>
   <style>
-    /* Box sizing para evitar overflow por padding/border */
     *, *::before, *::after {
       box-sizing: border-box;
     }
@@ -17,8 +16,17 @@
       max-width: 100vw;
       overflow-x: hidden;
       font-family: 'Courier New', monospace;
-      background-color: #121212;
       color: #f0f0f0;
+
+      /* Fundo fixo da estrada */
+      background: url('https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/photo_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+
+      /* Para permitir scroll e conteúdo */
+      position: relative;
+      z-index: 0;
+      overflow-y: auto;
+
       display: flex;
       justify-content: center;
       align-items: center;
@@ -33,11 +41,9 @@
       animation: pulse 2s infinite;
       user-select: none;
       transition: width 0.5s ease, max-width 0.5s ease;
-      /* Se quiser sombra vermelha, adicione aqui */
       filter: drop-shadow(0 0 8px rgba(179, 0, 0, 0.8));
     }
 
-    /* Classe para diminuir o patch */
     .small-patch {
       width: 250px !important;
       max-width: 60% !important;
@@ -48,7 +54,7 @@
     }
 
     .colete-img {
-      width: 90%;          /* Ajustado para % e não vw */
+      width: 90%;
       max-width: 500px;
       height: auto;
       display: none;
@@ -56,10 +62,9 @@
       border-radius: 15px;
       user-select: none;
       transition: width 0.5s ease, max-width 0.5s ease;
-      filter: drop-shadow(0 0 10px rgba(179, 0, 0, 0.9)); /* efeito vermelho */
+      filter: drop-shadow(0 0 10px rgba(179, 0, 0, 0.9));
     }
 
-    /* Classe para diminuir o colete */
     .small-colete {
       width: 350px !important;
       max-width: 75% !important;
@@ -86,7 +91,6 @@
       transform: scale(0.9);
     }
 
-    /* Botão Pegar Rota menor */
     #btnRota {
       display: none;
       margin-top: 15px;
@@ -127,19 +131,14 @@
 </head>
 <body>
 
-  <!-- Patch visível inicialmente -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/patch.png" alt="Patch do Motogrupo" class="patch-img" />
 
-  <!-- Botão da chave -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/chave.png" alt="Chave Girando" class="chave-btn" id="chaveBtn" />
 
-  <!-- Imagem do colete visível após clicar -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/colete_final.png" alt="Convite" id="coleteImg" class="colete-img" />
 
-  <!-- Botão Pegar Rota -->
   <button id="btnRota">Pegar Rota</button>
 
-  <!-- Áudio do motor -->
   <audio id="motorSound" src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/motor.mp3" preload="auto"></audio>
 
   <script>
@@ -195,5 +194,6 @@
       window.open(urlMaps, '_blank');
     });
   </script>
+
 </body>
 </html>
