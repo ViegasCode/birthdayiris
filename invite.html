@@ -33,6 +33,8 @@
       animation: pulse 2s infinite;
       user-select: none;
       transition: width 0.5s ease, max-width 0.5s ease;
+      /* Se quiser sombra vermelha, adicione aqui */
+      filter: drop-shadow(0 0 8px rgba(179, 0, 0, 0.8));
     }
 
     /* Classe para diminuir o patch */
@@ -126,19 +128,19 @@
 <body>
 
   <!-- Patch visível inicialmente -->
-  <img src="patch.png" alt="Patch do Motogrupo" class="patch-img" />
+  <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/patch.png" alt="Patch do Motogrupo" class="patch-img" />
 
   <!-- Botão da chave -->
-  <img src="chave.png" alt="Chave Girando" class="chave-btn" id="chaveBtn" />
+  <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/chave.png" alt="Chave Girando" class="chave-btn" id="chaveBtn" />
 
   <!-- Imagem do colete visível após clicar -->
-  <img src="colete_final.png" alt="Convite" id="coleteImg" class="colete-img" />
+  <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/colete_final.png" alt="Convite" id="coleteImg" class="colete-img" />
 
   <!-- Botão Pegar Rota -->
   <button id="btnRota">Pegar Rota</button>
 
   <!-- Áudio do motor -->
-  <audio id="motorSound" src="motor.mp3" preload="auto"></audio>
+  <audio id="motorSound" src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/motor.mp3" preload="auto"></audio>
 
   <script>
     const chaveBtn = document.getElementById('chaveBtn');
