@@ -168,6 +168,43 @@
       background-color: #d00000;
     }
 
+    #contador {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.95rem;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: #ffffff;
+      font-weight: bold;
+      text-shadow: 0 0 5px black;
+      z-index: 99;
+      font-family: 'Courier New', monospace;
+    }
+
+    #btnHome {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(179, 0, 0, 0.8);
+      border: none;
+      color: white;
+      font-size: 1.6rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #b30000;
+      user-select: none;
+      z-index: 99;
+      font-family: 'Courier New', monospace;
+      transition: background-color 0.3s ease;
+    }
+
+    #btnHome:hover {
+      background-color: #d00000;
+    }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
@@ -175,8 +212,8 @@
     }
 
     @keyframes girarChave {
-      from { transform: rotate(0deg);}
-      to { transform: rotate(360deg);}
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     @media (max-width: 600px) {
@@ -188,23 +225,14 @@
 </head>
 <body>
 
-  <!-- FOTO -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/iris_final.png" alt="Foto 3x4" class="foto-3x4" />
-
-  <!-- PATCH -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/patch.png" alt="Patch do Motogrupo" class="patch-img" id="patchImg" />
-
-  <!-- CHAVE -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/chave.png" alt="Chave Girando" class="chave-btn" id="chaveBtn" />
-
-  <!-- COLETE -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/colete_final.png" alt="Convite" id="coleteImg" class="colete-img" />
 
-  <!-- BOTÕES -->
   <button id="btnRota">Seguir Rota</button>
   <button id="btnConfirmarPresenca">Confirmar Presença</button>
 
-  <!-- FORMULÁRIO -->
   <form class="form-rsvp" id="formRsvp" action="https://formspree.io/f/xzzgolgo" method="POST" target="_blank">
     <h2>Confirmação de Presença</h2>
 
@@ -224,7 +252,7 @@
     <label for="comida">Selecione o que vai levar:</label>
     <select id="comida" name="comida" required>
       <option value="" disabled selected>Selecione</option>
-      <option value="pastel de queijo">Pastel de Queijo</option>
+      <option value="Pastel de Queijo">Pastel de Queijo</option>
       <option value="Bolo de Milho">Bolo de Milho</option>
       <option value="Caldo Verde">Caldo Verde</option>
       <option value="Caldo de Ervilha">Caldo de Ervilha</option>
@@ -232,7 +260,7 @@
       <option value="Bolo de Aipim">Bolo de Aipim</option>
       <option value="Canjica">Canjica</option>
       <option value="Cachorro Quente">Cachorro Quente</option>
-      <option value="Maça do Amor">Maça do Amor</option>
+      <option value="Maçã do Amor">Maçã do Amor</option>
       <option value="Caldo de Feijão">Caldo de Feijão</option>
       <option value="Cocada/Paçoca">Cocada/Paçoca</option>
     </select>
@@ -241,7 +269,9 @@
     <button type="button" id="btnMinimizarForm">Minimizar</button>
   </form>
 
-  <!-- AUDIO -->
+  <div id="contador"></div>
+  <button id="btnHome" title="Voltar para home (recarregar página)">🏠</button>
+
   <audio id="motorSound" src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/motor_final.mp3" preload="auto"></audio>
 
   <script>
@@ -253,6 +283,7 @@
     const btnConfirmarPresenca = document.getElementById('btnConfirmarPresenca');
     const formRsvp = document.getElementById('formRsvp');
     const btnMinimizarForm = document.getElementById('btnMinimizarForm');
+    const btnHome = document.getElementById('btnHome');
 
     function fadeInAudio(audio, duration = 2000) {
       audio.volume = 0;
@@ -301,6 +332,37 @@
       btnConfirmarPresenca.style.display = 'block';
       btnConfirmarPresenca.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
+
+    btnHome.addEventListener('click', () => {
+      location.reload();
+    });
+
+    // Contador regressivo
+    function atualizarContador() {
+      const agora = new Date();
+      const evento = new Date("2025-07-13T00:00:00");
+      const diff = evento - agora;
+
+      if (diff <= 0) {
+        document.getElementById("contador").textContent = "Hoje é o grande dia!";
+        return;
+      }
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+
+      const texto = `${dias}d ${horas}h ${minutos}m ${segundos}s para o evento`;
+      document.getElementById("contador").textContent = texto;
+      localStorage.setItem("ultimoContador", texto);
+    }
+
+    const salvo = localStorage.getItem("ultimoContador");
+    if (salvo) document.getElementById("contador").textContent = salvo;
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
   </script>
 
 </body>
