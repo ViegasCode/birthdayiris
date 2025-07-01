@@ -42,9 +42,9 @@
     .patch-img.small-patch {
       position: fixed;
       top: 1px;
-left: 20px;
+      left: 20px;
       right: 20px;
-animation: none;
+      animation: none;
       width: 200px;
       height: 200px;
       object-fit: cover;
@@ -52,7 +52,6 @@ animation: none;
       box-shadow: 0 0 0px rgba(0, 0, 0, 0.6);
       z-index: 10;
       user-select: none;
-    }
     }
 
     .pulse {
@@ -66,7 +65,7 @@ animation: none;
       display: none;
       margin-top: 30px;
       border-radius: 15px;
-	animation: pulse 3s infinite;
+      animation: pulse 3s infinite;
       user-select: none;
       transition: width 0.5s ease, max-width 0.5s ease;
     }
@@ -97,7 +96,7 @@ animation: none;
       transform: scale(0.9);
     }
 
-    #btnRota {
+    #btnRota, #btnConfirmarPresenca {
       display: none;
       margin-top: 15px;
       padding: 8px 16px;
@@ -114,7 +113,7 @@ animation: none;
       min-width: 140px;
     }
 
-    #btnRota:hover {
+    #btnRota:hover, #btnConfirmarPresenca:hover {
       background-color: #d00000;
     }
 
@@ -129,6 +128,47 @@ animation: none;
       box-shadow: 0 0 0px rgba(0, 0, 0, 0.6);
       z-index: 10;
       user-select: none;
+    }
+
+    /* FORMULÁRIO */
+    .form-rsvp {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      margin-top: 40px;
+      border-radius: 12px;
+      color: white;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      font-family: 'Courier New', monospace;
+      display: none; /* inicialmente escondido */
+      flex-direction: column;
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .form-rsvp input,
+    .form-rsvp select {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .form-rsvp button {
+      background-color: #b30000;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+    }
+
+    .form-rsvp button:hover {
+      background-color: #d00000;
     }
 
     @keyframes pulse {
@@ -163,8 +203,47 @@ animation: none;
   <!-- COLETE -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/colete_final.png" alt="Convite" id="coleteImg" class="colete-img" />
 
-  <!-- BOTÃO ROTA -->
+  <!-- BOTÕES -->
   <button id="btnRota">Seguir Rota</button>
+  <button id="btnConfirmarPresenca">Confirmar Presença</button>
+
+  <!-- FORMULÁRIO DE CONFIRMAÇÃO -->
+  <form class="form-rsvp" id="formRsvp" action="https://formspree.io/f/xzzgolgo" method="POST" target="_blank" >
+    <h2>Confirmação de Presença</h2>
+
+    <label for="nome">Seu nome:</label>
+    <input type="text" id="nome" name="nome" required placeholder="Ex: João da Honda" />
+
+    <label for="presenca">Vai comparecer?</label>
+    <select id="presenca" name="presenca" required>
+      <option value="" disabled selected>Selecione</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label for="quantidade">Quantas pessoas com você?</label>
+    <input type="number" id="quantidade" name="quantidade" min="0" placeholder="Ex: 2" />
+
+<label for="comida">Selecione o que vai levar:</label>
+    <select id="comida" name="comida" required>
+      <option value="" disabled selected>Selecione</option>
+      <option value="pastel de queijo">Pastel de Queijo</option>
+      <option value="Bolo de Milho">Bolo de Milho</option>
+      <option value="Caldo Verde">Caldo Verde</option>        
+      <option value="Caldo de Ervilha">Caldo de Ervilha</option>        
+      <option value="Salgadinho">Salgadinho</option>        
+      <option value="Bolo de Aipim">Bolo de Aipim</option>        
+      <option value="Canjica">Canjica</option>        
+      <option value="Cachorro Quente">Cachorro Quente</option>        
+      <option value="Maça do Amor">Maça do Amor</option>        
+      <option value="Caldo de Feijão">Caldo de Feijão</option>        
+      <option value="Cocada/Paçoca">Cocada/Paçoca</option>   
+    </select>
+    
+
+
+    <button type="submit">Confirmar Presença</button>
+  </form>
 
   <audio id="motorSound" src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/motor_final.mp3" preload="auto"></audio>
 
@@ -174,6 +253,8 @@ animation: none;
     const patchImg = document.getElementById('patchImg');
     const motorSound = document.getElementById('motorSound');
     const btnRota = document.getElementById('btnRota');
+    const btnConfirmarPresenca = document.getElementById('btnConfirmarPresenca');
+    const formRsvp = document.getElementById('formRsvp');
 
     function fadeInAudio(audio, duration = 2000) {
       audio.volume = 0;
@@ -208,10 +289,11 @@ animation: none;
       coleteImg.style.display = 'block';
       coleteImg.classList.add('small-colete', 'pulse');
 
-      // Mostrar botão Rota
+      // Mostrar botões
       btnRota.style.display = 'block';
+      btnConfirmarPresenca.style.display = 'block';
 
-      // Scroll para centralizar
+      // Scroll para centralizar conteúdo
       coleteImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
@@ -219,6 +301,12 @@ animation: none;
       const destino = encodeURIComponent('Praia da Olaria 649');
       const urlMaps = `https://www.google.com/maps/dir/?api=1&destination=${destino}`;
       window.open(urlMaps, '_blank');
+    });
+
+    btnConfirmarPresenca.addEventListener('click', () => {
+      formRsvp.style.display = 'flex';
+      formRsvp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      btnConfirmarPresenca.style.display = 'none'; // esconde botão depois de abrir o formulário
     });
   </script>
 
