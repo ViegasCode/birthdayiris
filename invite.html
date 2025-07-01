@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aniversário da Iris</title>
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     body, html {
       margin: 0;
@@ -19,13 +17,9 @@
       color: #f0f0f0;
       background: url('https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/backgroundday.jpg') no-repeat center center fixed;
       background-size: cover;
-      position: relative;
-      z-index: 0;
-      overflow-y: auto;
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
+      align-items: center;
     }
 
     .patch-img {
@@ -34,86 +28,20 @@
       height: auto;
       margin-top: 20px;
       animation: pulse 2s infinite;
-      user-select: none;
-      transition: all 0.5s ease;
       filter: drop-shadow(0 0 8px rgba(179, 0, 0, 0.8));
+      user-select: none;
     }
 
     .patch-img.small-patch {
       position: fixed;
       top: 1px;
       left: 20px;
-      right: 20px;
-      animation: none;
       width: 200px;
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
       z-index: 10;
-      user-select: none;
-    }
-
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-
-    .colete-img {
-      width: 90%;
-      max-width: 600px;
-      height: auto;
-      display: none;
-      margin-top: 30px;
-      border-radius: 15px;
-      animation: pulse 3s infinite;
-      user-select: none;
-      transition: width 0.5s ease, max-width 0.5s ease;
-    }
-
-    .small-colete {
-      width: 710px !important;
-      max-width: 75% !important;
-    }
-
-    .chave-btn {
-      height: 180px;
-      width: auto;
-      margin-top: 30px;
-      cursor: pointer;
-      filter: drop-shadow(0 0 8px rgba(179,0,0,0.8));
-      animation: girarChave 3s linear infinite;
-      transition: animation-duration 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      display: block;
-    }
-
-    .chave-btn:hover {
-      animation-duration: 1s;
-    }
-
-    .chave-btn:active {
-      animation-play-state: paused;
-      transform: scale(0.9);
-    }
-
-    #btnRota, #btnConfirmarPresenca {
-      display: none;
-      margin-top: 15px;
-      padding: 8px 16px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      background-color: #b30000;
-      color: #fff;
-      box-shadow: 0 0 12px #b30000;
-      user-select: none;
-      transition: background-color 0.3s ease;
-      align-self: center;
-      min-width: 140px;
-    }
-
-    #btnRota:hover, #btnConfirmarPresenca:hover {
-      background-color: #d00000;
+      animation: none;
     }
 
     .foto-3x4 {
@@ -125,47 +53,62 @@
       object-fit: cover;
       border-radius: 8px;
       z-index: 10;
+    }
+
+    .colete-img {
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      display: none;
+      margin-top: 30px;
+      border-radius: 15px;
+      animation: pulse 3s infinite;
       user-select: none;
     }
 
-    .form-rsvp {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      margin-top: 40px;
-      border-radius: 12px;
-      color: white;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.5);
-      font-family: 'Courier New', monospace;
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-      align-items: stretch;
+    .small-colete {
+      width: 710px !important;
+      max-width: 75% !important;
     }
 
-    .form-rsvp input,
-    .form-rsvp select {
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-      width: 100%;
-    }
-
-    .form-rsvp button {
-      background-color: #b30000;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
+    .chave-btn {
+      height: 180px;
+      margin-top: 30px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-weight: bold;
+      filter: drop-shadow(0 0 8px rgba(179,0,0,0.8));
+      animation: girarChave 3s linear infinite;
     }
 
-    .form-rsvp button:hover {
+    .chave-btn:hover { animation-duration: 1s; }
+    .chave-btn:active {
+      animation-play-state: paused;
+      transform: scale(0.9);
+    }
+
+    button {
+      display: none;
+      margin-top: 15px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: #b30000;
+      color: #fff;
+      box-shadow: 0 0 12px #b30000;
+      min-width: 140px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
       background-color: #d00000;
+    }
+
+    #contador {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      text-shadow: 0 0 6px black;
     }
 
     @keyframes pulse {
@@ -180,21 +123,19 @@
     }
 
     @media (max-width: 600px) {
-      .chave-btn {
-        height: 140px;
-      }
+      .chave-btn { height: 140px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- FOTO -->
+  <!-- FOTO 3x4 -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/iris_final.png" alt="Foto 3x4" class="foto-3x4" />
 
-  <!-- PATCH -->
+  <!-- PATCH DO GRUPO -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/patch.png" alt="Patch do Motogrupo" class="patch-img" id="patchImg" />
 
-  <!-- CHAVE -->
+  <!-- BOTÃO CHAVE -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/chave.png" alt="Chave Girando" class="chave-btn" id="chaveBtn" />
 
   <!-- COLETE -->
@@ -203,45 +144,12 @@
   <!-- BOTÕES -->
   <button id="btnRota">Seguir Rota</button>
   <button id="btnConfirmarPresenca">Confirmar Presença</button>
+  <button id="btnHome">Voltar para o Início</button>
 
-  <!-- FORMULÁRIO -->
-  <form class="form-rsvp" id="formRsvp" action="https://formspree.io/f/xzzgolgo" method="POST" target="_blank">
-    <h2>Confirmação de Presença</h2>
+  <!-- CONTADOR -->
+  <div id="contador"></div>
 
-    <label for="nome">Seu nome:</label>
-    <input type="text" id="nome" name="nome" required placeholder="Ex: João da Honda" />
-
-    <label for="presenca">Vai comparecer?</label>
-    <select id="presenca" name="presenca" required>
-      <option value="" disabled selected>Selecione</option>
-      <option value="Sim">Sim</option>
-      <option value="Não">Não</option>
-    </select>
-
-    <label for="quantidade">Quantas pessoas com você?</label>
-    <input type="number" id="quantidade" name="quantidade" min="0" placeholder="Ex: 2" />
-
-    <label for="comida">Selecione o que vai levar:</label>
-    <select id="comida" name="comida" required>
-      <option value="" disabled selected>Selecione</option>
-      <option value="pastel de queijo">Pastel de Queijo</option>
-      <option value="Bolo de Milho">Bolo de Milho</option>
-      <option value="Caldo Verde">Caldo Verde</option>
-      <option value="Caldo de Ervilha">Caldo de Ervilha</option>
-      <option value="Salgadinho">Salgadinho</option>
-      <option value="Bolo de Aipim">Bolo de Aipim</option>
-      <option value="Canjica">Canjica</option>
-      <option value="Cachorro Quente">Cachorro Quente</option>
-      <option value="Maça do Amor">Maça do Amor</option>
-      <option value="Caldo de Feijão">Caldo de Feijão</option>
-      <option value="Cocada/Paçoca">Cocada/Paçoca</option>
-    </select>
-
-    <button type="submit">Confirmar Presença</button>
-    <button type="button" id="btnMinimizarForm">Minimizar Formulário</button>
-  </form>
-
-  <!-- AUDIO -->
+  <!-- ÁUDIO -->
   <audio id="motorSound" src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/motor_final.mp3" preload="auto"></audio>
 
   <script>
@@ -251,8 +159,7 @@
     const motorSound = document.getElementById('motorSound');
     const btnRota = document.getElementById('btnRota');
     const btnConfirmarPresenca = document.getElementById('btnConfirmarPresenca');
-    const formRsvp = document.getElementById('formRsvp');
-    const btnMinimizarForm = document.getElementById('btnMinimizarForm');
+    const btnHome = document.getElementById('btnHome');
 
     function fadeInAudio(audio, duration = 2000) {
       audio.volume = 0;
@@ -274,13 +181,18 @@
       if (navigator.vibrate) navigator.vibrate(50);
       chaveBtn.style.animationPlayState = 'paused';
       chaveBtn.style.transform = 'scale(0.9)';
-      fadeInAudio(motorSound, 2000);
       chaveBtn.style.display = 'none';
+
+      fadeInAudio(motorSound, 2000);
       patchImg.classList.add('small-patch');
+
       coleteImg.style.display = 'block';
       coleteImg.classList.add('small-colete', 'pulse');
+
       btnRota.style.display = 'block';
       btnConfirmarPresenca.style.display = 'block';
+      btnHome.style.display = 'block';
+
       coleteImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
@@ -291,16 +203,39 @@
     });
 
     btnConfirmarPresenca.addEventListener('click', () => {
-      formRsvp.style.display = 'flex';
-      formRsvp.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      btnConfirmarPresenca.style.display = 'none';
+      window.open("https://docs.google.com/forms/d/e/1FAIpQLSeWVK96EEJeCBv0E26MezOB3AE8eKNljAfosO7hNEfUYGiyhg/viewform", "_blank");
     });
 
-    btnMinimizarForm.addEventListener('click', () => {
-      formRsvp.style.display = 'none';
-      btnConfirmarPresenca.style.display = 'block';
-      btnConfirmarPresenca.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btnHome.addEventListener('click', () => {
+      location.reload();
     });
+
+    // Contador regressivo
+    function atualizarContador() {
+      const agora = new Date();
+      const evento = new Date("2025-07-13T00:00:00");
+      const diff = evento - agora;
+
+      if (diff <= 0) {
+        document.getElementById("contador").textContent = "O grande dia chegou!";
+        return;
+      }
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+
+      const texto = `${dias}d ${horas}h ${minutos}m ${segundos}s para o evento`;
+      document.getElementById("contador").textContent = texto;
+      localStorage.setItem("ultimoContador", texto);
+    }
+
+    const salvo = localStorage.getItem("ultimoContador");
+    if (salvo) document.getElementById("contador").textContent = salvo;
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
   </script>
 
 </body>
