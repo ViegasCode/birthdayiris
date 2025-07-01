@@ -49,7 +49,6 @@
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
-      box-shadow: 0 0 0px rgba(0, 0, 0, 0.6);
       z-index: 10;
       user-select: none;
     }
@@ -125,12 +124,10 @@
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
-      box-shadow: 0 0 0px rgba(0, 0, 0, 0.6);
       z-index: 10;
       user-select: none;
     }
 
-    /* FORMULÁRIO */
     .form-rsvp {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
@@ -141,7 +138,7 @@
       max-width: 400px;
       box-shadow: 0 0 12px rgba(0,0,0,0.5);
       font-family: 'Courier New', monospace;
-      display: none; /* inicialmente escondido */
+      display: none;
       flex-direction: column;
       gap: 15px;
       align-items: stretch;
@@ -191,13 +188,13 @@
 </head>
 <body>
 
-  <!-- FOTO 3x4 NO CANTO SUPERIOR DIREITO -->
+  <!-- FOTO -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/iris_final.png" alt="Foto 3x4" class="foto-3x4" />
 
-  <!-- PATCH DO GRUPO -->
+  <!-- PATCH -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/patch.png" alt="Patch do Motogrupo" class="patch-img" id="patchImg" />
 
-  <!-- BOTÃO CHAVE -->
+  <!-- CHAVE -->
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/chave.png" alt="Chave Girando" class="chave-btn" id="chaveBtn" />
 
   <!-- COLETE -->
@@ -207,8 +204,8 @@
   <button id="btnRota">Seguir Rota</button>
   <button id="btnConfirmarPresenca">Confirmar Presença</button>
 
-  <!-- FORMULÁRIO DE CONFIRMAÇÃO -->
-  <form class="form-rsvp" id="formRsvp" action="https://formspree.io/f/xzzgolgo" method="POST" target="_blank" >
+  <!-- FORMULÁRIO -->
+  <form class="form-rsvp" id="formRsvp" action="https://formspree.io/f/xzzgolgo" method="POST" target="_blank">
     <h2>Confirmação de Presença</h2>
 
     <label for="nome">Seu nome:</label>
@@ -224,27 +221,27 @@
     <label for="quantidade">Quantas pessoas com você?</label>
     <input type="number" id="quantidade" name="quantidade" min="0" placeholder="Ex: 2" />
 
-<label for="comida">Selecione o que vai levar:</label>
+    <label for="comida">Selecione o que vai levar:</label>
     <select id="comida" name="comida" required>
       <option value="" disabled selected>Selecione</option>
       <option value="pastel de queijo">Pastel de Queijo</option>
       <option value="Bolo de Milho">Bolo de Milho</option>
-      <option value="Caldo Verde">Caldo Verde</option>        
-      <option value="Caldo de Ervilha">Caldo de Ervilha</option>        
-      <option value="Salgadinho">Salgadinho</option>        
-      <option value="Bolo de Aipim">Bolo de Aipim</option>        
-      <option value="Canjica">Canjica</option>        
-      <option value="Cachorro Quente">Cachorro Quente</option>        
-      <option value="Maça do Amor">Maça do Amor</option>        
-      <option value="Caldo de Feijão">Caldo de Feijão</option>        
-      <option value="Cocada/Paçoca">Cocada/Paçoca</option>   
+      <option value="Caldo Verde">Caldo Verde</option>
+      <option value="Caldo de Ervilha">Caldo de Ervilha</option>
+      <option value="Salgadinho">Salgadinho</option>
+      <option value="Bolo de Aipim">Bolo de Aipim</option>
+      <option value="Canjica">Canjica</option>
+      <option value="Cachorro Quente">Cachorro Quente</option>
+      <option value="Maça do Amor">Maça do Amor</option>
+      <option value="Caldo de Feijão">Caldo de Feijão</option>
+      <option value="Cocada/Paçoca">Cocada/Paçoca</option>
     </select>
-    
-
 
     <button type="submit">Confirmar Presença</button>
+    <button type="button" id="btnMinimizarForm">Minimizar Formulário</button>
   </form>
 
+  <!-- AUDIO -->
   <audio id="motorSound" src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/motor_final.mp3" preload="auto"></audio>
 
   <script>
@@ -255,6 +252,7 @@
     const btnRota = document.getElementById('btnRota');
     const btnConfirmarPresenca = document.getElementById('btnConfirmarPresenca');
     const formRsvp = document.getElementById('formRsvp');
+    const btnMinimizarForm = document.getElementById('btnMinimizarForm');
 
     function fadeInAudio(audio, duration = 2000) {
       audio.volume = 0;
@@ -276,24 +274,13 @@
       if (navigator.vibrate) navigator.vibrate(50);
       chaveBtn.style.animationPlayState = 'paused';
       chaveBtn.style.transform = 'scale(0.9)';
-
       fadeInAudio(motorSound, 2000);
-
-      // Esconde a chave
       chaveBtn.style.display = 'none';
-
-      // Move e reduz o patch
       patchImg.classList.add('small-patch');
-
-      // Mostra o colete
       coleteImg.style.display = 'block';
       coleteImg.classList.add('small-colete', 'pulse');
-
-      // Mostrar botões
       btnRota.style.display = 'block';
       btnConfirmarPresenca.style.display = 'block';
-
-      // Scroll para centralizar conteúdo
       coleteImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
@@ -306,7 +293,13 @@
     btnConfirmarPresenca.addEventListener('click', () => {
       formRsvp.style.display = 'flex';
       formRsvp.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      btnConfirmarPresenca.style.display = 'none'; // esconde botão depois de abrir o formulário
+      btnConfirmarPresenca.style.display = 'none';
+    });
+
+    btnMinimizarForm.addEventListener('click', () => {
+      formRsvp.style.display = 'none';
+      btnConfirmarPresenca.style.display = 'block';
+      btnConfirmarPresenca.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   </script>
 
