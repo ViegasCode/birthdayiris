@@ -116,6 +116,26 @@
       background-color: #d00000;
     }
 
+    #btnLigarMotor {
+      margin-top: 12px;
+      background-color: #b30000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #b30000;
+      user-select: none;
+      font-family: 'Courier New', monospace;
+      animation: pulse 2s infinite;
+      transition: background-color 0.3s ease;
+    }
+
+    #btnLigarMotor:hover {
+      background-color: #d00000;
+    }
+
     .foto-3x4 {
       position: fixed;
       top: 20px;
@@ -228,6 +248,7 @@
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/iris_final.png" alt="Foto 3x4" class="foto-3x4" />
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/patch.png" alt="Patch do Motogrupo" class="patch-img" id="patchImg" />
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/chave.png" alt="Chave Girando" class="chave-btn" id="chaveBtn" />
+  <button id="btnLigarMotor">🔑 Ligar Motor</button>
   <img src="https://raw.githubusercontent.com/ViegasCode/birthdayiris/main/colete_final.png" alt="Convite" id="coleteImg" class="colete-img" />
 
   <button id="btnRota">Seguir Rota</button>
@@ -285,6 +306,7 @@
     const formRsvp = document.getElementById('formRsvp');
     const btnMinimizarForm = document.getElementById('btnMinimizarForm');
     const btnHome = document.getElementById('btnHome');
+    const btnLigarMotor = document.getElementById('btnLigarMotor');
 
     function fadeInAudio(audio, duration = 2000) {
       audio.volume = 0;
@@ -308,12 +330,17 @@
       chaveBtn.style.transform = 'scale(0.9)';
       fadeInAudio(motorSound, 2000);
       chaveBtn.style.display = 'none';
+      btnLigarMotor.style.display = 'none';
       patchImg.classList.add('small-patch');
       coleteImg.style.display = 'block';
       coleteImg.classList.add('small-colete', 'pulse');
       btnRota.style.display = 'block';
       btnConfirmarPresenca.style.display = 'block';
       coleteImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    btnLigarMotor.addEventListener('click', () => {
+      chaveBtn.click();
     });
 
     btnRota.addEventListener('click', () => {
